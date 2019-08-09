@@ -1,0 +1,39 @@
+.log-header{
+  height: 30px;
+  line-height: 30px;
+  background: #eeeeee;
+  border-bottom: 1px solid #ccc;
+  margin: 0;
+  padding: 0 20px;
+  color: #666;
+}
+.log-item{
+  min-height: 30px;
+  // border-bottom: 1px solid #ccc;
+  font-size: 12px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  width: 100%;
+}
+.log-container{
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  height: 400px;
+  width: 800px;
+  right: 400px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  overflow: hidden;
+  z-index: 1000;
+  border: 1px solid #ccc;
+  background: rgba($color: #000000, $alpha: 0.8);
+}
+.log-content{
+  padding: 0;
+  margin: 0;
+  color: chartreuse;
+}

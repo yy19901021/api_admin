@@ -1,0 +1,70 @@
+*, *::before, *::after{
+  box-sizing: border-box;
+}
+body, html{
+  font-size: 14px;
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+}
+body, ul,p, h3{
+  margin: 0;
+}
+#root{
+  width: 100%;
+  height: 100%;
+}
+a{
+  text-decoration: none;
+}
+li{
+  list-style: none;
+}
+.hide{
+  display: none;
+}
+// 字体大小
+$fontSize: (14, 16, 20, 24, 30);
+@each $i in $fontSize {
+  .f_#{$i}{
+    font-size: #{$i}px;
+  }
+}
+
+// flex布局
+.flex{
+  display: flex;
+}
+.flex-c{
+  display: flex;
+  align-items: center;
+}
+.flex-j-b{
+  justify-content: space-between;
+}
+.flex-1{
+  flex: 1
+}
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+// 文字位置
+.text-r{
+  text-align: right;
+}
+.text-c{
+  text-align: center;
+}
+// 圆角
+.b_rd_10{
+  border-radius: 10px;
+}
+// 手势
+.cursor_p{
+  cursor: pointer;
+}
+
+
+

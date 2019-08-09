@@ -1,0 +1,40 @@
+.project-item{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+  &:hover{
+    .project-item-actions{
+      transform: translateY(0)
+    }
+  }
+  .project-item-actions{
+    height: 48px;
+    text-align: center;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    transform: translateY(100%);
+    border: 1px solid #e8e8e8;
+    background: #fafafa;
+    transition: all .3s linear;
+    color: rgba(0,0,0,0.45);
+    cursor: pointer;
+    .anticon{
+      line-height: 48px;
+    }
+    .anticon:hover{
+      color: #1890ff;
+    }
+    .border-r{
+      border-right: 1px solid #e8e8e8; 
+    }
+    .btn-disabled{
+      color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+}

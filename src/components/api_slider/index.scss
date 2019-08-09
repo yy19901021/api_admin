@@ -1,0 +1,28 @@
+.slider-title{
+  height: 36px;
+  line-height: 36px;
+  border-left: 3px solid #1890ff;
+  padding-left: 20px;
+  color: #4d4d4d;
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+  &-active{
+    background:#e6f7ff;
+    color: #1890ff; 
+  }
+}
+.silder{
+  margin-bottom: 12px;
+}
+.slider-sub-title{
+  .slider-title{
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid #eee;
+    border-left: 1px solid #eee;
+    border-top: none;
+    text-indent: 1em;
+  }
+}

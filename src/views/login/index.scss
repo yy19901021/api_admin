@@ -1,0 +1,25 @@
+.login{
+  height: 100%;
+  width: 100%;
+  background: #eeeeee url(../../assets/images/login_bg.jpg) no-repeat center;
+  background-size: 100% auto;
+}
+.login-form{
+  min-width: 300px;
+  &-button{
+    width: 100%;
+  }
+}
+.login-title{
+  text-align: center;
+  color: #ffffff;
+}
+.login-code{
+  width: 100px;
+  svg{
+    width: 100px;
+  }
+}
+.login-change-code{
+  font-size: 12px;
+}
