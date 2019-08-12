@@ -2,7 +2,7 @@ function toMap(params:object): Map<string, any> {
   const result = new Map()
   const keys = Object.keys(params)
   const values = Object.values(params)
-  keys.map((item, index) => {
+  keys.forEach((item, index) => {
     result.set(item, values[index])
   })
   return result

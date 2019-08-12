@@ -3,12 +3,15 @@ import { Modal, Input, Form, Select, notification } from 'antd';
 import ApiForm from '../api_form';
 import { FormComponentProps } from 'antd/lib/form';
 import Requests from '../../api';
+import { connect } from 'react-redux';
+import { addModels } from '../../redux/actions';
 
 export interface IModelEditProps extends FormComponentProps {
   type: string
   visible: boolean
   initValues?: any
   hide: (type?: string) => void
+  addModel: (model: any) => void
 }
 
 export interface IModelEditState {
@@ -49,6 +52,7 @@ class ModelEdit extends React.Component<IModelEditProps, IModelEditState> {
               notification.success({
                 message: '模块创建成功！'
               })
+              this.props.addModel(Object.assign({}, values, data.data))
               this.props.form.resetFields()
               this.props.hide()
             }
@@ -92,4 +96,11 @@ class ModelEdit extends React.Component<IModelEditProps, IModelEditState> {
   }
 }
 
-export default Form.create<IModelEditProps>()(ModelEdit)
+export default connect(
+  () => {},
+  (dispatch)=> ({
+    addModel: (model: any) => {
+      dispatch(addModels(model))
+    }
+  })
+)(Form.create<IModelEditProps>()(ModelEdit))

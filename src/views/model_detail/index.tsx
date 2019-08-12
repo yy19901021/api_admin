@@ -9,7 +9,6 @@ import { METHODS_COLOR } from '../../assets/js/constants';
 import TestLog from '../../components/test_console';
 import { connect } from 'react-redux';
 import { addLogs, loadingLog, removeModels } from '../../redux/actions';
-import Column from 'antd/lib/table/Column';
 import { ColumnProps } from 'antd/lib/table';
 export interface IDetailModelProps extends RouteComponentProps<{model_id: string}> {
   addLog: (log: any) => void

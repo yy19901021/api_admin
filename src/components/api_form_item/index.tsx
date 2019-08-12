@@ -38,7 +38,7 @@ export class EditHeader extends React.Component<IEditHeaderleProps>{
     )
   }
 }
-export const Types = (props: {init?: string | null, onChange?: (e:any)=> void}) => (<SelectSingle onChange={props.onChange}  initvalue={props.init || 'string'} values={['string', 'number', 'boolean', 'array', 'object']}></SelectSingle>)
+export const Types = (props: {init?: string | null, onChange?: (e:any)=> void}) => (<SelectSingle onChange={props.onChange}  initvalue={props.init || 'string'} values={['string', 'number', 'array', 'object']}></SelectSingle>)
 export const Header_Keys = (<SelectSingle values={HEADERS_KEYS}></SelectSingle>)
 
 export interface IEditContentleProps {
