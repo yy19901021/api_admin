@@ -8,6 +8,7 @@
   width: 100%;
   border-bottom: 1px solid #eee;
   border-top: 1px solid #eee;
+  font-weight: 500;
   &-active{
     background:#e6f7ff;
     color: #1890ff; 
@@ -18,11 +19,12 @@
 }
 .slider-sub-title{
   .slider-title{
-    height: 30px;
-    line-height: 30px;
+    height: 36px;
+    line-height: 36px;
     border-bottom: 1px solid #eee;
     border-left: 1px solid #eee;
     border-top: none;
     text-indent: 1em;
+    font-weight: 300;
   }
 }

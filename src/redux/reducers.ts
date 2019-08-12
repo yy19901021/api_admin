@@ -1,5 +1,5 @@
 import initstate from './state'
-import { USER, MODELS, ADD_MODELS, LOADING, ADDLOG, REMOVELOG, LOADINGLOG, REMOVELOGALL} from './actions';
+import { USER, MODELS, ADD_MODELS, LOADING, ADDLOG, REMOVELOG, LOADINGLOG, REMOVELOGALL, REMOVE_MODELS} from './actions';
 import { combineReducers } from 'redux';
 
 export function userInfor(state= initstate.userInfor, action:any) {
@@ -17,6 +17,11 @@ export function models(state= initstate.models, action:any) {
        return state
     case ADD_MODELS:
         return state.concat(action.infor)
+    case REMOVE_MODELS:
+        const models = state.concat([])
+        const index = models.findIndex((item: any) => item.model_id === action.model_id)
+        models.splice(index, 1)
+        return models
     default:
       return state
   }

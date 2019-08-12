@@ -213,7 +213,7 @@ export interface IAPIEditState {
 
 function formatUrl(...arg:string[]) {
   const url = arg.reduce((pre, item) => {
-    if (item === undefined) {
+    if (item === undefined || item === null) {
       item = ''
     }
     if (pre.match(/\/+$/)) {

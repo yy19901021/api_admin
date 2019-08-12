@@ -45,6 +45,9 @@ interface LoginBody {
   updateModel(data: any) {
     return Http.post('/model/update', data)
   },
+  deleteModel(id: string) {
+    return Http.post('/model/delete', {model_id: id})
+  },
   getModel(id: string) {
     return Http.post('/model/detail', {model_id: id})
   },
@@ -68,6 +71,9 @@ interface LoginBody {
   },
   sendApi(data: any) {
     return Http.post('/send/api', data)
+  },
+  deleteApi(id: string) {
+    return Http.post('/api/delete', {api_id: id})
   }
 }
 export default Requests

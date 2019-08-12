@@ -2,16 +2,20 @@ import * as React from 'react';
 // import './index.scss'
 import { RouteComponentProps, withRouter } from 'react-router';
 import Requests from '../../api';
-import {Button, Descriptions, Table, Input, Tag} from 'antd'
+import {Button, Descriptions, Table, Input, Tag, Modal} from 'antd'
 import ModelEdit from '../../components/model_edit';
 import { Link } from 'react-router-dom';
 import { METHODS_COLOR } from '../../assets/js/constants';
 import TestLog from '../../components/test_console';
 import { connect } from 'react-redux';
-import { addLogs, loadingLog } from '../../redux/actions';
+import { addLogs, loadingLog, removeModels } from '../../redux/actions';
+import Column from 'antd/lib/table/Column';
+import { ColumnProps } from 'antd/lib/table';
 export interface IDetailModelProps extends RouteComponentProps<{model_id: string}> {
   addLog: (log: any) => void
   loadingLog: (loading: boolean) => void
+  removeModel: (id: string) => void
+  userInfo: any
   logs: any[]
   loading: boolean
 }
@@ -28,6 +32,7 @@ class DetailModel extends React.Component<IDetailModelProps, IDetailModelStates>
   limit: number
   page: number
   times: number
+  search: string
   constructor(props: IDetailModelProps) {
     super(props)
     this.state = {
@@ -40,6 +45,7 @@ class DetailModel extends React.Component<IDetailModelProps, IDetailModelStates>
     this.model_id = props.match.params.model_id
     this.limit = 10
     this.page = 1
+    this.search = ''
     props.history.listen(({state}) => {
       if (state) {
         this.model_id = state
@@ -59,7 +65,7 @@ class DetailModel extends React.Component<IDetailModelProps, IDetailModelStates>
     })
   }
   getApis() {
-    Requests.getModelApis({model_id: this.model_id, limit: this.limit, page: this.page}).then((data) => {
+    Requests.getModelApis({model_id: this.model_id, limit: this.limit, page: this.page, search: this.search}).then((data) => {
       if (data.code === 200) {
         this.setState({
           api_lists: data.data.lists,
@@ -67,6 +73,10 @@ class DetailModel extends React.Component<IDetailModelProps, IDetailModelStates>
         })
       }
     })
+  }
+  searchApi = (val: string) => {
+    this.search = val
+    this.getApis()
   }
   componentDidMount() {
     this.getDetail()
@@ -90,7 +100,9 @@ class DetailModel extends React.Component<IDetailModelProps, IDetailModelStates>
     }
   }
   handlerTableChange = (pagination: any) => {
-    console.log(pagination)
+    this.limit = pagination.pageSize
+    this.page = pagination.current
+    this.getApis()
   }
   handlerHide = (type?: string) => {
     if (type === 'edit_end') {
@@ -142,17 +154,56 @@ class DetailModel extends React.Component<IDetailModelProps, IDetailModelStates>
       }
     })
   }
+  deleteApi = (id: string) => {
+    return () => {
+      Modal.confirm({
+        title: '删除',
+        content: '确认删除当前的Api接口吗？',
+        okText: '确认',
+        cancelText: '取消',
+        onOk: () => {
+          Requests.deleteApi(id).then(({data}) => {
+            if (data.code === 200) {
+              this.getApis()
+            }
+          })
+        }
+      })
+     
+    }
+  }
+  deleteModel = () => {
+    Modal.confirm({
+      title: "删除模块",
+      content: "确认删除该模块吗？",
+      okText: "确定",
+      cancelText: "取消",
+      onOk: () => {
+        Requests.deleteModel(this.model_id).then(({data}) => {
+          if (data.code === 200) {
+            this.props.history.goBack()
+            this.props.removeModel(this.model_id)
+          }
+        })
+      }
+    })
+  }
   public render() {
-    const columns = [
+    const user_id = this.props.userInfo.id
+    const role = this.props.userInfo.role
+    const showEdit = role === 1 || user_id === this.state.detail.create_user
+    const columns: ColumnProps<any>[] = [
       {
         title: '接口名称',
         dataIndex: 'title',
         key: 'title',
+        align: "center"
       },
       {
         title: '请求方式',
         dataIndex: 'method',
         key: 'method',
+        align: "center",
         render: (text: any, record: any) => {
           return (
             <Tag color={METHODS_COLOR.get(record.method)}>{record.method.toUpperCase()}</Tag>
@@ -172,6 +223,8 @@ class DetailModel extends React.Component<IDetailModelProps, IDetailModelStates>
       {
         title: '操作',
         key: 'action',
+        width: 220,
+        align: "center",
         render: (text: any, record: any) => {
           return (
             <div className="flex-c">
@@ -179,7 +232,7 @@ class DetailModel extends React.Component<IDetailModelProps, IDetailModelStates>
                 <Link to={this.model_id + '/api/' + record.api_id}>查看编辑</Link>
               </Button>
               <Button type="primary" size="small" style={{marginRight: 20}} onClick={this.testApi(record.api_id)}>接口测试</Button>
-              <Button type="danger" size="small">删除</Button>
+              <Button type="danger" size="small" onClick={this.deleteApi(record.api_id)}>删除</Button>
             </div>
           )
         }
@@ -187,7 +240,14 @@ class DetailModel extends React.Component<IDetailModelProps, IDetailModelStates>
     ]
     return (
       <div className="detail-Model">
-        <Descriptions bordered title={<div className="felx-c"><span style={{paddingRight: 10}}>{this.state.detail.title}</span><Button onClick={this.showModel} type="link" icon="edit"></Button></div>}>
+        <Descriptions bordered title={
+        <div className="flex-c">
+          <span style={{paddingRight: 10}}>{this.state.detail.title}</span>
+          {showEdit && <Button onClick={this.showModel} type="link" icon="edit"></Button>}
+          <div className="flex-1 text-r">
+           {showEdit && <Button onClick={this.deleteModel} type="danger" icon="delete"></Button>}
+          </div>
+        </div>}>
         <Descriptions.Item label="模块域名" span={1}>{this.state.detail.host}</Descriptions.Item>
           <Descriptions.Item label="base_url" span={2}>{this.state.detail.base_url}</Descriptions.Item>
           <Descriptions.Item label="模块描述" span={3}>{this.state.detail.description}</Descriptions.Item>
@@ -201,23 +261,27 @@ class DetailModel extends React.Component<IDetailModelProps, IDetailModelStates>
             </Button>
           </div>
           <div >
-           <Input.Search placeholder="请输入关键字"  enterButton={true}/>
+           <Input.Search onSearch={this.searchApi} placeholder="请输入关键字"  enterButton={true}/>
           </div>
         </div>
         {this.state.showLog && (<TestLog  onClose={() => {this.setState({showLog: false})}}></TestLog>)}
-        <Table rowKey="api_id" onChange={this.handlerTableChange} pagination={{total: this.state.total, pageSize: this.limit, current: this.page}} columns={columns} dataSource={this.state.api_lists}></Table>
+        <Table  rowKey="api_id" onChange={this.handlerTableChange} pagination={{total: this.state.total, pageSize: this.limit, current: this.page}} columns={columns} dataSource={this.state.api_lists}></Table>
         <ModelEdit hide={this.handlerHide}  initValues={this.state.detail} type="edit" visible={this.state.visible_model}></ModelEdit>
      </div>
     );
   }
 }
 export default connect((state :any)=>({
-  loading: state.logs.loading
+  loading: state.logs.loading,
+  userInfo: state.userInfor
 }), (dispatch) =>( {
   addLog: (data: any) => {
     dispatch(addLogs(data))
   },
   loadingLog: (loading: boolean) => {
     dispatch(loadingLog(loading))
+  },
+  removeModel: (model_id: string) => {
+    dispatch(removeModels(model_id))
   }
 }))(withRouter(DetailModel))

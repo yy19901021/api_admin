@@ -1,6 +1,7 @@
 export const USER = 'USER'
 export const MODELS = 'models'
 export const ADD_MODELS = 'add_models'
+export const REMOVE_MODELS = 'remove_models'
 export const LOADING = 'loading'
 export const ADDLOG = 'addlog'
 export const REMOVELOG = 'removelog'
@@ -21,8 +22,14 @@ export function getModels(infor?: any[]) {
 }
 export function addModels(infor: any) {
   return {
-    type: MODELS,
+    type: ADD_MODELS,
     infor
+  }
+}
+export function removeModels(id: string) {
+  return {
+    type: REMOVE_MODELS,
+    model_id: id
   }
 }
 

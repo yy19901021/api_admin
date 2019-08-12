@@ -22,7 +22,6 @@
   margin: 0;
   position: absolute;
   top: 0;
-  height: 400px;
   width: 800px;
   right: 400px;
   border-top-left-radius: 6px;
@@ -36,4 +35,6 @@
   padding: 0;
   margin: 0;
   color: chartreuse;
+  height: 400px;
+  overflow-y: auto;
 }

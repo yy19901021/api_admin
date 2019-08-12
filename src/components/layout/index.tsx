@@ -10,6 +10,7 @@ export interface ILayoutProps {
   name: string
   clearUser: any
   silder: React.ReactElement,
+  hideColCollapsed?: boolean
   onCollapsed: (val: boolean) => void
 }
 export interface ILayoutStates {
@@ -61,7 +62,7 @@ class Layout extends React.Component<ILayoutProps & RouteComponentProps, ILayout
         </div>
         <div className="layout-right">
           <div className="layout-right-header">
-            <div className="flex-1"><Icon type={this.state.collapsed ? 'menu-fold' : 'menu-unfold'} style={{fontSize: '30px'}} onClick={this.toggle}/></div>
+            <div className="flex-1"> {!this.props.hideColCollapsed && <Icon type={this.state.collapsed ? 'menu-fold' : 'menu-unfold'} style={{fontSize: '30px'}} onClick={this.toggle}/>}</div>
             <div className="flex-c">
               <Avatar size={40} icon="user"></Avatar>
               <Dropdown overlay={menus}>
@@ -71,9 +72,11 @@ class Layout extends React.Component<ILayoutProps & RouteComponentProps, ILayout
           </div>
           <div className="layout-right-content-container">
             <div className="layout-right-content">
-              <Switch>
-                {this.props.children}
-              </Switch>
+              <div className="layout-right-content-inner">
+                <Switch>
+                  {this.props.children}
+                </Switch>
+              </div>
             </div>
           </div>
         </div>

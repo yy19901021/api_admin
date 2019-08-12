@@ -45,7 +45,7 @@ class Detail extends React.Component<IDetailProps , IDetailStates> {
       </div>
     );
     return (
-        <MainLayout silder={menus} onCollapsed = {(val) => {this.setState({collapsed: val})}}>
+        <MainLayout hideColCollapsed={true} silder={menus} onCollapsed = {(val) => {this.setState({collapsed: val})}}>
           <MyRouter exact path="/projectDetail/:project_id"  component={DetailContent} ></MyRouter>
           <MyRouter exact path="/projectDetail/:project_id/model/:model_id" component={DetailModel} ></MyRouter>
           <MyRouter exact path="/projectDetail/:project_id/model/:model_id/api/:api_id" component={APIEdit} ></MyRouter>

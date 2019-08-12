@@ -35,8 +35,8 @@ class LogItem extends React.Component<ILogItemProps> {
     console.log(this.props)
     return (
       <div className='log-item' style={{color: colors[this.props.type]}}>
+        <span style={{marginRight: 10, fontWeight: 'bold'}}>{this.props.index + 1}</span>
         {tags[this.props.type]}
-        {/* {<Link to={}></Link>} */}
         <Link to={`/projectDetail/${this.props.project_id}/model/${this.props.model_id}/api/${this.props.api_id}`} style={{paddingRight:5,color: colors[this.props.type], textDecoration: 'underline'}}>{this.props.api_content}:</Link>
         <span className="flex-1">{this.props.message}</span>
         <span style={{margin: '0 10px'}}>{this.props.time}</span>
