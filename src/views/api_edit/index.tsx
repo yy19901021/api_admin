@@ -494,7 +494,7 @@ class APIEdit extends React.Component<IAPIEditProps, IAPIEditState> {
             <Col span={6}>
               <FormItem label="接口名称">
                 {getFieldDecorator('title', {initialValue: title, rules: [{required: true, message: '请填写接口名称'}]})(
-                <Input onChange={this.pathChange} placeholder="接口名称"></Input>
+                <Input  placeholder="接口名称"></Input>
                 )}
               </FormItem>
             </Col>
