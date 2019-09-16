@@ -44,7 +44,7 @@ class Register extends React.Component<ILoginProps & RouteComponentProps> {
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('username', {
-              rules: [{ required: true, message: '请输入用户账号!' }, {min: 2, max: 10,message: "用户账号数不能小于2位大于10位"}, {pattern: /^[0-9a-zA-Z_]+$/g, message: '账号只能包含数字字母和下划线(_)'}],
+              rules: [{ required: true, message: '请输入用户账号!' }, {min: 2, max: 20,message: "用户账号数不能小于2位大于20位"}, {pattern: /^[0-9a-zA-Z_]+$/g, message: '账号只能包含数字字母和下划线(_)'}],
             })(
               <Input
                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -54,7 +54,7 @@ class Register extends React.Component<ILoginProps & RouteComponentProps> {
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('email', {
-              rules: [{message: '请输入正确的邮箱格式!', pattern: /[0-9a-zA-Z_]+@[0-9a-zA-Z_]+\.[0-9a-zA-Z_]+/ }],
+              rules: [{message: '请输入正确的邮箱格式!', type: "email" }],
             })(
               <Input
                 prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}

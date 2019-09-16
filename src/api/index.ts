@@ -33,6 +33,9 @@ interface LoginBody {
   getProDetail(id: number | string) {
     return Http.post('/project/detail', {project_id: id})
   },
+  exportProJson(id: number | string) {
+    return Http.post('/project/json', {project_id: id})
+  },
   delProject(id: number | string) {
     return Http.post('/project/delete', {project_id: id})
   },

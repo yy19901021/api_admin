@@ -23,13 +23,18 @@ export default class DetailContent extends React.Component<IDetailContentProps, 
     }
     this.project_id = props.match.params.project_id
   }
-  getDetail() {
+  getDetail = () => {
     Requests.getProDetail(this.project_id).then((data) => {
       if (data.code === 200) {
         this.setState({
           detail: data.data
         })
       }
+    })
+  }
+  exportFile = () => {
+    Requests.exportProJson(this.project_id).then((data) => {
+      
     })
   }
   componentDidMount() {
@@ -52,7 +57,7 @@ export default class DetailContent extends React.Component<IDetailContentProps, 
         </Descriptions>
         <div className="flex-c" style={{paddingTop: 20, justifyContent: 'flex-end'}}>
           <div className="flex-1">
-            <Button type="primary">项目API接口测试</Button>
+            <Button type="primary" onClick={this.exportFile}>导出json文件</Button>
             <Button type="primary" style={{marginLeft: 20}} onClick={this.showModel}>添加项目模块</Button>
           </div>
           <Button type="link" style={{marginLeft: 20}} icon="arrow-right">

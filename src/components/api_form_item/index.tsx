@@ -74,7 +74,7 @@ export class EditContent extends React.Component<IEditContentleProps, {open: boo
           </Col>
           <Col  className="edit_header_item" span={6}>{value !== null &&  value !== undefined && <Input onBlur={this.inputOnChange('value')}  defaultValue={value + ''} ></Input>}</Col>
           <Col  className="edit_header_item" span={6}>
-            {(this.props.index !== 0 || (parentItem && parentItem.children && parentItem.children.length > 1)) && <Button icon="minus-circle" type="link" size="large" onClick={() => {this.props.onEdit && this.props.onEdit('minus', id)}}></Button>}
+            {(this.props.index !== 0 || (parentItem && parentItem.children && parentItem.children.length > 0)) && <Button icon="minus-circle" type="link" size="large" onClick={() => {this.props.onEdit && this.props.onEdit('minus', id)}}></Button>}
             {!['arrary', 'object'].includes(type) && <Button icon="plus-circle" type="link" size="large" onClick={() => {this.props.onEdit && this.props.onEdit('plus', id)}}></Button>}
           </Col>
         </Row>

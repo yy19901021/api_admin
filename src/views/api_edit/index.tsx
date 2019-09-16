@@ -65,12 +65,14 @@ class ContentLists {
     Object.keys(data).forEach((item,index) => {
       this.steps.push(item)
       const value = data[item]
-      const itemObj1 = new ContentItem(item, value, this, parnet)
-      this.setMap(itemObj1)
-      if (typeof value === 'object') {
-        this.formatTo(value, itemObj1)
+      if (value !== null) {
+        const itemObj1 = new ContentItem(item, value, this, parnet)
+        this.setMap(itemObj1)
+        if (typeof value === 'object') {
+          this.formatTo(value, itemObj1)
+        }
+        result.push(itemObj1)
       }
-      result.push(itemObj1)
       this.steps.pop()
     })
     return result
@@ -243,7 +245,7 @@ class APIEdit extends React.Component<IAPIEditProps, IAPIEditState> {
     this.api_id = props.match.params.api_id
     this.api_detail = {}
     this.activeKey = 'Headers'
-    this.jsonData = '{}'
+    this.jsonData = JSON.stringify({}, null, "\t")
     this.state = {
       api_url: '',
       title: '',
@@ -350,7 +352,7 @@ class APIEdit extends React.Component<IAPIEditProps, IAPIEditState> {
       showJsonModel: true
     })
     const curentState = this.getCurentState()
-    this.jsonData = curentState ? JSON.stringify(curentState.toJson()).replace(/([,{\\[])/g, "$1\n").replace(/([}\]])/g, '\n$1') : '{}'
+    this.jsonData = curentState ? JSON.stringify(curentState.toJson(), null, '\t') : JSON.stringify({}, null, "\t")
   }
   modelOk = () => {
     const values = this.props.form.getFieldValue('json')
@@ -441,8 +443,9 @@ class APIEdit extends React.Component<IAPIEditProps, IAPIEditState> {
     })
   }
   test = () => {
-    const {body, params, headers, result, method} = this.state
+    const {body, params, headers, result} = this.state
     const api_url = this.props.form.getFieldValue('api_url')
+    const method = this.props.form.getFieldValue('method')
     Requests.sendApi({body: body.toJson(), params: params.toJson(), headers: headers.toJson(), result: result.toJson(), method, api_url}).then((data) => {
       if (data.code === 200) {
         this.setState({

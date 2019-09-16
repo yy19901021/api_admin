@@ -51,14 +51,14 @@ class ProjectItem extends React.Component<IProjectItemProps & RouteComponentProp
     ]
     return (
       <div className="project-item">
-        <Card style={{height: 135}}>
+        <Card actions={actions}>
             <Card.Meta
               title={this.props.title}
               description={this.props.desc}
               avatar={<Avatar style={{ backgroundColor: '#1890ff' }}>项目</Avatar>}
             ></Card.Meta>
         </Card>
-        <div className="project-item-actions">{actions}</div>
+        {/* <div className="project-item-actions">{actions}</div> */}
       </div>
     );
   }

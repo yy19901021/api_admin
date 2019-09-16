@@ -83,8 +83,8 @@ class ModelEdit extends React.Component<IModelEditProps, IModelEditState> {
     )
     const form_list = [
       {lable: '模块名称', key: 'title', sheet: (<Input placeholder="模块名称"/>), rules: [{required:true, message: '请填写模块名称'}], init_value: this.props.initValues},
-      {lable: '模块域名', key: 'host', sheet: (<Input placeholder="模块域名"/>), rules: [{required:true, message: '请填写模块域名'}, {type: 'url', message: '域名格式不正确'}], init_value: this.props.initValues},
-      {lable: '模块base_url', key: 'base_url', sheet: (<Input placeholder="模块base_url"/>), rules: [], init_value: this.props.initValues},
+      {lable: '模块域名', key: 'host', sheet: (<Input placeholder="模块域名, eg: http://127.0.0.1:3000"/>), rules: [{required:true, message: '请填写模块域名'}, {type: 'url', message: '域名格式不正确'}], init_value: this.props.initValues},
+      {lable: '模块base_url', key: 'base_url', sheet: (<Input placeholder="模块base_url , eg: /api or api"/>), rules: [], init_value: this.props.initValues},
       {lable: '所属项目', key: 'project_id', sheet: projectSelect, rules: [{required:true, message: '请填写模块名称'}], init_value: this.props.initValues},
       {lable: '模块描述', key: 'description', sheet: (<Input.TextArea placeholder="模块描述"/>), rules: [{required:true, message: '请填写模块描述'}], init_value: this.props.initValues},
     ]
@@ -97,7 +97,7 @@ class ModelEdit extends React.Component<IModelEditProps, IModelEditState> {
 }
 
 export default connect(
-  () => {},
+  () => ({}),
   (dispatch)=> ({
     addModel: (model: any) => {
       dispatch(addModels(model))
