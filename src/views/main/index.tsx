@@ -6,9 +6,7 @@ import { MyRouter } from '../../router';
 import ProjectList from '../project_lists';
 import ProjectEdit from '../edit_project';
 import MainLayout from '../../components/layout';
-
 export interface IMainProps {
-  
 }
 export interface IMainStates {
   collapsed: boolean
@@ -40,10 +38,10 @@ class Main extends React.Component<IMainProps & RouteComponentProps, IMainStates
       </Menu>
     )
     return (
-        <MainLayout silder={menus} onCollapsed = {(val) => {this.setState({collapsed: val})}}>
-            <MyRouter title="项目列表" exact  path="/project_list/:type(mine|create|jion)" component={ProjectList}></MyRouter>
-            <MyRouter exact  path="/project/:project_id" component={ProjectEdit}></MyRouter>
-        </MainLayout>
+          <MainLayout silder={menus} onCollapsed = {(val) => {this.setState({collapsed: val})}}>
+              <MyRouter title="项目列表" exact  path="/project_list/:type(mine|create|jion)" component={ProjectList}></MyRouter>
+              <MyRouter exact  path="/project/:project_id" component={ProjectEdit}></MyRouter>
+          </MainLayout>
     );
   }
 }

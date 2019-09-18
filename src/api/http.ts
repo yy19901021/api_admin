@@ -52,5 +52,8 @@ export default {
   },
   post: function(url: string, data: any):Promise<any> {
     return AXIOSINS.post(url, data)
+  },
+  export: function(url: string, data: any):Promise<any>{
+    return AXIOSINS.post(url, data, {headers: {'responseType': 'blob'}})
   }
 }

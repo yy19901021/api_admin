@@ -33,8 +33,15 @@ export default class DetailContent extends React.Component<IDetailContentProps, 
     })
   }
   exportFile = () => {
-    Requests.exportProJson(this.project_id).then((data) => {
-      
+    Requests.exportProJson(this.project_id).then(({data}) => {
+      const bold = new Blob([JSON.stringify(data, null, '\t')], {type: 'application/octet-stream'})
+      console.log(data)
+      let link = URL.createObjectURL(bold)
+      let elementA = document.createElement('a')
+      elementA.download = 'api.json'
+      elementA.href = link
+      elementA.click()
+      elementA.remove()
     })
   }
   componentDidMount() {

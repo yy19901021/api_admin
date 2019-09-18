@@ -34,7 +34,10 @@ interface LoginBody {
     return Http.post('/project/detail', {project_id: id})
   },
   exportProJson(id: number | string) {
-    return Http.post('/project/json', {project_id: id})
+    return Http.export('/project/json', {project_id: id})
+  },
+  importJson(data: FormData) {
+    return Http.post('/project/import/json', data)
   },
   delProject(id: number | string) {
     return Http.post('/project/delete', {project_id: id})
