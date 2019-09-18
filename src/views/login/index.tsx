@@ -13,7 +13,7 @@ export interface ILoginStates {
 }
 const tabList = [
   {key: 'login', tab: '登录'},
-  {key: 'register', tab: '注册'},
+  // {key: 'register', tab: '注册'},
 ]
 
 const tabListNode: Map<string, JSX.Element> = new Map()

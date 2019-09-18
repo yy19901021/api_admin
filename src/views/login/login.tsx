@@ -61,7 +61,7 @@ class Login extends React.Component<ILoginProps & RouteComponentProps, ILoginSta
             })(
               <Input
                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="用户账号"
+                placeholder="用户账号: （预览账号：preview）"
               />,
             )}
           </Form.Item>
@@ -72,7 +72,7 @@ class Login extends React.Component<ILoginProps & RouteComponentProps, ILoginSta
               <Input
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 type="password"
-                placeholder="用户密码"
+                placeholder="用户密码 （预览密码： preview123456）"
               />,
             )}
           </Form.Item>
