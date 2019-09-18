@@ -13,7 +13,7 @@ export interface ILoginProps extends FormComponentProps {
 
 class Register extends React.Component<ILoginProps & RouteComponentProps> {
   handleSubmit = (e: any) => {
-    e.preventDefault();
+    // e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
         Requests.register(values).then((data) => {
@@ -22,7 +22,7 @@ class Register extends React.Component<ILoginProps & RouteComponentProps> {
               message: '注册成功'
             })
             this.props.dispatch(getUser(data.data))
-            this.props.history.push('/')
+            // this.props.history.push('/login')
           }
         })
       }
@@ -31,7 +31,7 @@ class Register extends React.Component<ILoginProps & RouteComponentProps> {
   public render() {
     const { getFieldDecorator } = this.props.form;
     return (
-        <Form onSubmit={this.handleSubmit} className="login-form" >
+        <Form  className="login-form" >
           <Form.Item>
             {getFieldDecorator('pet_name', {
               rules: [{ required: true, message: '请输入用户昵称!' }, {min: 2, max: 6,message: "用户昵称数不能小于2位大于6位"}],
@@ -92,7 +92,7 @@ class Register extends React.Component<ILoginProps & RouteComponentProps> {
               <a className="login-form-forgot" href="">
                 Forgot password
               </a> */}
-            <Button type="primary" htmlType="submit" className="login-form-button">
+            <Button type="primary" onClick={this.handleSubmit} className="login-form-button">
               注册
               </Button>
             {/* Or <a href="">register now!</a> */}

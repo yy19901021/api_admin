@@ -61,12 +61,14 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
         return;
     }
   }
-  upload(file: any): boolean {
+  upload = (file: any): boolean => {
     console.log(file)
     const data = new FormData()
     data.append("file", file)
     data.append("key", "file")
-    Requests.importJson(data)
+    Requests.importJson(data).finally(() => {
+      this.queryproject()
+    })
     return false
   }
   changePage = (page: number) => {

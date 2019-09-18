@@ -29,11 +29,8 @@ class ProjectItem extends React.Component<IProjectItemProps & RouteComponentProp
       okText: "删除",
       cancelText: '取消',
       onOk: () => {
-        Requests.delProject(this.props.id).then((data) => {
+        Requests.delProject(this.props.id).then(({data}) => {
           if (data.code === 200) {
-            notification.success({
-              message: data.msg
-            })
             this.props.onDel()
           }
         })
